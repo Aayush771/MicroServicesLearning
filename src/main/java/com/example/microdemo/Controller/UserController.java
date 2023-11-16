@@ -4,7 +4,6 @@ import com.example.microdemo.Entity.User;
 import com.example.microdemo.Repository.DAOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -21,7 +20,7 @@ public class UserController {
         return new ResponseEntity<>(daoService.findAllUsers(),HttpStatus.ACCEPTED);
     }
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> retriveUser(@PathVariable Integer id){
+    public ResponseEntity<User> retrieveUser(@PathVariable Integer id){
         return new ResponseEntity<>(daoService.findUserById(id),HttpStatus.OK);
     }
     @PostMapping("/user")

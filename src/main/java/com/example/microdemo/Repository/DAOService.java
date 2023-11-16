@@ -1,6 +1,7 @@
 package com.example.microdemo.Repository;
 
 import com.example.microdemo.Entity.User;
+import com.example.microdemo.Exception.UserNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -28,9 +29,12 @@ public class DAOService {
     public User findUserById(Integer id){
        return  userList.stream()
                 .filter(element -> Objects.equals(element.getUserId(), id)) // Example condition: starts with "B"
-                .findFirst().get();
+                .findFirst().orElseThrow(()-> new UserNotFoundException("User Not found with this id- "+id));
        // return result.get();
     }
+
+
+
     public  User saveUser(User user){
         user.setUserId(++userCount);
         userList.add(user);
