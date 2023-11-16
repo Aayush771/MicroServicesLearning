@@ -1,5 +1,6 @@
 package com.example.microdemo.Entity;
 
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -10,6 +11,8 @@ import java.time.LocalDate;
 @ToString
 public class User {
     private Integer userId;
+    @Size(min = 2,message = "Name should at least have 2 Character")
     private String name;
+    @Past(message = "Birth Date should be in past!")
     private LocalDate birthDate;
 }

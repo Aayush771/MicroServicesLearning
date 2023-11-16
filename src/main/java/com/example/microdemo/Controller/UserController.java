@@ -2,6 +2,7 @@ package com.example.microdemo.Controller;
 
 import com.example.microdemo.Entity.User;
 import com.example.microdemo.Repository.DAOService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class UserController {
         return new ResponseEntity<>(daoService.findUserById(id),HttpStatus.OK);
     }
     @PostMapping("/user")
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user){
        User savedUser = daoService.saveUser(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
