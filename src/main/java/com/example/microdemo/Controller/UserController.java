@@ -4,6 +4,8 @@ import com.example.microdemo.Entity.User;
 import com.example.microdemo.Repository.DAOService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +23,13 @@ public class UserController {
         return new ResponseEntity<>(daoService.findAllUsers(),HttpStatus.ACCEPTED);
     }
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> retrieveUser(@PathVariable Integer id){
-        return new ResponseEntity<>(daoService.findUserById(id),HttpStatus.OK);
+    public ResponseEntity<EntityModel<User>> retrieveUser(@PathVariable Integer id) {
+        User user = daoService.findUserById(id);
+
+        EntityModel<User> userEntityModel = EntityModel.of(user);
+        WebMvcLinkBuilder linkBuilder = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllUsers());
+        userEntityModel.add(linkBuilder.withRel("all-users"));
+        return new ResponseEntity<>(userEntityModel, HttpStatus.OK);
     }
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user){
