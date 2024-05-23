@@ -18,6 +18,7 @@ public class VersionController {
     public PersonV2 getVersionOfPersonV2(){
         return  new PersonV2(new Name("Bob","Charlie"));
     }
+  
     @GetMapping(path = "/person",params = "version=1")
     public PersonV1 getFistVersionOfPersonByRequestParameter(){
         return  new PersonV1("Bob Charlie");
