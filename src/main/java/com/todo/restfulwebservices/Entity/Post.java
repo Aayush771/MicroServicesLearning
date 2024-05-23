@@ -1,4 +1,4 @@
-package com.todo.restfulwebservices.Models;
+package com.todo.restfulwebservices.Entity;
 
 public class Post {
 

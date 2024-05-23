@@ -1,35 +1,45 @@
 package com.todo.restfulwebservices.Controller;
 
-import java.util.List;
+import com.todo.restfulwebservices.Entity.User;
+import com.todo.restfulwebservices.Repository.DAOService;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.todo.restfulwebservices.Models.User;
-import com.todo.restfulwebservices.Repository.UserDAOService;
+import java.net.URI;
+import java.util.List;
 
 @RestController
 public class UserController {
-
-
-    private UserDAOService userDAOService;
-
-    
-    public UserController(UserDAOService userDAOService) {
-        this.userDAOService = userDAOService;
-    }
-
-
+    @Autowired
+    private  DAOService daoService;
     @GetMapping("/users")
-    public List<User> retriveAllUsers(){
-
-       return userDAOService.findAll();
+    public ResponseEntity<List<User>> getAllUsers(){
+        return new ResponseEntity<>(daoService.findAllUsers(),HttpStatus.ACCEPTED);
     }
-    @PostMapping("/users")
-    public User createUser(@RequestBody User user){
-       return userDAOService.saveUser(user);
+    @GetMapping("/user/{id}")
+    public ResponseEntity<EntityModel<User>> retrieveUser(@PathVariable Integer id) {
+        User user = daoService.findUserById(id);
+
+        EntityModel<User> userEntityModel = EntityModel.of(user);
+        WebMvcLinkBuilder linkBuilder = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllUsers());
+        userEntityModel.add(linkBuilder.withRel("all-users"));
+        return new ResponseEntity<>(userEntityModel, HttpStatus.OK);
+    }
+    @PostMapping("/user")
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user){
+       User savedUser = daoService.saveUser(user);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedUser.getUserId())
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
 }
