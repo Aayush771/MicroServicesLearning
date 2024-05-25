@@ -36,6 +36,4 @@ public class RestHandler {
          Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage("good.morning.message",null,"Default Message",locale);
     }
-  //  @PostMapping("user");
-    //@GetMapping("users")
 }
