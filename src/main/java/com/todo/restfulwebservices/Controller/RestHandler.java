@@ -31,9 +31,19 @@ public class RestHandler {
     public HelloBean getHelloVariableHandler(@PathVariable String name){
         return new HelloBean(String.format("Hello MicroServices! %s",name));
     }
+    /**
+     * This function is used to get the localized message from message source. 
+     * If the message key is not found, the default message will be returned.
+     *
+     * @return String The localized message.
+     */
     @GetMapping("/hello-intr")
     public String getHelloIntrHandler(){
+         // Get the current locale
          Locale locale = LocaleContextHolder.getLocale();
+        // Use message source to get the localized message
         return messageSource.getMessage("good.morning.message",null,"Default Message",locale);
     }
+
+
 }

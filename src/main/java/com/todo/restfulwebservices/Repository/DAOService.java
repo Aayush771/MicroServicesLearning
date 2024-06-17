@@ -36,7 +36,12 @@ public class DAOService {
     }
 
 
-
+    /**
+     * Saves a user by incrementing the user count and adding the user to the user list.
+     *
+     * @param  user  the user to be saved
+     * @return       the saved user
+     */
     public  User saveUser(User user){
         user.setUserId(++userCount);
         userList.add(user);
