@@ -1,0 +1,86 @@
+\documentclass[9pt, a4paper]{article} % Reduced font size
+
+% Packages for formatting
+\usepackage{fontspec}
+\usepackage{geometry}  % Consider using `\geometry{margin=1in}` (optional)
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+% Define resume specific commands (modify as needed)
+\newcommand{\headingBf}[1]{\noindent\textbf{#1}}  % Bold text for headings
+\newcommand{\headingIt}[2]{\noindent\textit{#1} (#2)} % Italic for title, bracketed info
+\newcommand{\resume_list}{\begin{itemize}[leftmargin=*, itemsep=-1pt, parsep=0pt]}
+\newcommand{\resume_listitem}{\item}                             % Adjust list item formatting here (optional)
+
+\begin{document}
+
+% Your name and contact information (modify as needed)
+\noindent {\Large Your Name} \\
+\noindent your_email@email.com \\
+\noindent +91-123-456-7890 (Optional) \\
+\noindent [LinkedIn URL] (Optional)  % Replace with your LinkedIn profile URL (if applicable)
+
+\section{Summary}
+
+> Dedicated Java Backend Developer with 2 years of professional experience. Specialize in clean code and exploring new technologies (1000+ hours in Java & JavaScript). Proven ability to excel in individual & collaborative projects. Eager to apply problem-solving skills in a dynamic tech environment.
+
+\section{Skills}
+
+**Technologies:** Microservices, Spring Boot, Spring Security, Docker, CI/CD, Jenkins, Spring Data JPA, Jackson, Multithreading, Lombok, JUnit 5, Mockito, Data Structures Algorithms 
+**Cloud:** Salt-Cloud, Linode, GCP, AWS 
+**Languages:** Java, JavaScript, SQL 
+**Testing:** JUnit 5, Mockito  
+
+\section{Recent Experience}
+
+\headingBf{Crio.Do (June 2023 - Sep 2024)}
+\headingIt{Project Engineer}{Bangalore, India}
+\begin{resume_list}
+  \item Collaborated with content & product teams to develop new projects using Java, Spring Boot, Spring Security (10+ projects). Wrote test cases (JUnit, Mockito).
+  \item Supported product engineering team in troubleshooting & resolving backend development challenges.
+\end{resume_list}
+
+\headingBf{Masai School (Jun 2022 - May 2023)}
+\headingIt{Instructional Associate}{Bangalore, India}
+\begin{resume_list}
+  \item Mentored 100+ students on Spring Boot with MySQL projects.
+  \item Conducted Standups & Pair Programming sessions on core Java & DSA.
+\end{resume_list}
+
+\section{Projects}
+
+**Project 1: Online Wallet Payment Application** (Solo Project - 5 Days)
+
+* Developed a web-based application for sending, receiving money, and bill payments.
+* Implemented features for deposit, withdrawal, and money transfer functionalities.
+* Utilized Core Java for backend development, MySQL for database management, and Spring Boot for rapid application development.
+* Built the user interface layout and designed the Entity-Relationship (ER) diagram for data modeling.
+* Created a secure authentication module with login and logout functionalities using Spring Security.
+* Implemented robust data validation throughout the application to ensure data integrity.
+* Developed REST APIs for deposit and money transfer functionalities, leveraging Spring Security for authorization.
+
+**View project on GitHub:** https://github.com/Aayush771/OnlineWalletApplication
+
+**Project 2: QEats W** (September 2023)
+
+* Developed backend functionalities for a popular food ordering mobile application (QEats).
+* Tech Stack: Java, Spring Boot, Lombok, MongoDB, JMeter, Mockito, REST, Unit testing.
+* Implemented REST API endpoints for querying restaurant information and placing food orders.
+* Optimized application performance by 80% under heavy loads using the Redis database for caching frequently accessed data.
+
+**[Optional: Add more projects following the same format]**
+
+\section{Education}
+
+\subsection{Secondary Education}  
+\headingBf{School Name}{City, State}
+\headingIt{Higher Secondary Education (10+2)}{Graduation Year}
+
+\subsection{Technical Education}  
+\headingBf{State Board of Technical Education, Ranchi}{Ranchi, Jharkhand, India}
+\headingIt{Diploma in Mechanical Engineering}{Jun 2012 - Mar 2016}
+
+\section{Certifications}
+
+\headingBf{Masai School}{Bangalore, India}
+\heading
