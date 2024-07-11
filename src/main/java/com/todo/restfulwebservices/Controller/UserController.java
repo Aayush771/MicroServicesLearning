@@ -23,14 +23,29 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers(){
         return new ResponseEntity<>(daoService.findAllUsers(),HttpStatus.ACCEPTED);
     }
+    /**
+     * Retrieve a specific user by their ID.
+     *
+     * @param id The ID of the user to retrieve.
+     * @return The user entity if found, or a 404 response if not.
+     */
     @GetMapping("/user/{id}")
     public ResponseEntity<EntityModel<User>> retrieveUser(@PathVariable Integer id) {
+        // Find the user by ID
         User user = daoService.findUserById(id);
 
+        // If the user is not found, return a 404 response
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Create a model of the user with links to all users
         EntityModel<User> userEntityModel = EntityModel.of(user);
         WebMvcLinkBuilder linkBuilder = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllUsers());
         userEntityModel.add(linkBuilder.withRel("all-users"));
-        return new ResponseEntity<>(userEntityModel, HttpStatus.OK);
+
+        // Return the user entity with a 200 OK status
+        return ResponseEntity.ok(userEntityModel);
     }
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user){
